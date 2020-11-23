@@ -53,3 +53,7 @@ ul {
 .highlight {
   font-weight: bold;
 }
+
+.winning-sq {
+  background-color: limegreen;
+}

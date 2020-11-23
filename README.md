@@ -120,7 +120,7 @@ This is how the buttons look now:
 
 ![Improvement-2](README-Imgs/improvement-2.png)
 
-## Using two loops to render the squares
+## Use two loops to render the squares
 
 In this improvement we need to make the render method of the Board component more efficient. Currently we have hardcoded the 9 squares that we need to render, which isn't quite neat, instead we can use a nested loop for this.
 
@@ -164,7 +164,7 @@ class Board extends React.Component {
 }
 ```
 
-## Sorting the moves in either ascending or descending order
+## Sort the moves in either ascending or descending order
 
 In this improvement we need to add a button that toggles the order in which the moves are displayed. Currently it is always displayed in ascending order (_i.e from game start to the latest move_), but we need to add a button to toggle this ordering from ascending to descending (_i.e from latest move to game start_) and visa-versa.
 
@@ -231,3 +231,117 @@ render() {
 This is how the moves look in Descending order.
 
 ![Improvement-3](README-Imgs/improvement-4.png)
+
+## Highlight the three squares that caused the win.
+
+In this improvement we need to highlight the three squares that caused the win.
+
+Following are the changes that we make in order to achieve this:
+
+- First we need to somehow get the positions of the winning squares, if we carefully look at how the `calculateWinner` function is defined we would observe that the `lines` array contains all the possible winning positions and we can easily return the winning position using this. So we now return an object that stores both the winner and wining positions. This is how the function looks now.
+
+```js
+function calculateWinner(squares) {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return {
+        winner: squares[a],
+        positions: lines[i],
+      };
+    }
+  }
+  return {
+    winner: null,
+    positions: [],
+  };
+}
+```
+
+- Since we have modified the `calculateWinner` function we need to make corrections in the `handleClick` and `render` method because now the function doesn't directly return the winner but it returns an object.
+
+```js
+handleClick(i) {
+    ...
+    if (calculateWinner(squares).winner || squares[i]) {
+      return;
+    }
+    ...
+  }
+```
+
+```js
+render() {
+    ...
+    const winInfo = calculateWinner(current.squares);
+    ...
+    if (winInfo.winner) {
+      status = "Winner: " + winInfo.winner;
+    } else {
+      status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+    }
+    return (
+      ...
+    );
+  }
+```
+
+- Next we pass a prop `winningSqs` to the `Board` component that contains the winning positions in an array or an empty array depending on whether the game is won or not.
+
+```js
+<Board
+  squares={current.squares}
+  onClick={(i) => this.handleClick(i)}
+  winningSqs={winData.positions}
+/>
+```
+
+- Then we pass a prop `isWinningSq` to the `Square` component that stores whether that square is a winning square or not. So this how the `renderSquare` method looks now.
+
+```js
+function renderSquare(i) {
+  return (
+    <Square
+      key={i}
+      value={this.props.squares[i]}
+      onClick={() => this.props.onClick(i)}
+      isWinningSq={this.props.winningSqs.includes(i)}
+    />
+  );
+}
+```
+
+- Finally lets add a class `winning-sq` to our css file and add this class dynamically to the button in the `Square` component.
+
+```css
+.winning-sq {
+  background-color: limegreen;
+}
+```
+
+```js
+function Square(props) {
+  return (
+    <button
+      className={`square ${props.isWinningSq ? "winning-sq" : ""}`}
+      onClick={props.onClick}
+    >
+      {props.value}
+    </button>
+  );
+}
+```
+
+This how the board looks like when someone wins
+
+![Improvement-3](README-Imgs/improvement-5.png)
