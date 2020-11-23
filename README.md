@@ -15,7 +15,16 @@ npm start
 
 [This](https://codepen.io/gaearon/pen/gWWZgR?editors=0010) is where the official React tutorial ended. So, we will be starting from here onwards.
 
-## 1. Display the location for each move
+# Improvements
+
+- [1. Display the location for each move in the format (col, row) in the move history list](#1-display-the-location-for-each-move-in-the-format--col--row--in-the-move-history-list)
+- [2. Bold the currently selected item in the move list](#2-bold-the-currently-selected-item-in-the-move-list)
+- [3. Rewrite Board to use two loops to make the squares instead of hardcoding them](#3-rewrite-board-to-use-two-loops-to-make-the-squares-instead-of-hardcoding-them)
+- [4. Add a toggle button that lets you sort the moves in either ascending or descending order](#4-add-a-toggle-button-that-lets-you-sort-the-moves-in-either-ascending-or-descending-order)
+- [5. When someone wins, highlight the three squares that caused the win](#5-when-someone-wins--highlight-the-three-squares-that-caused-the-win)
+- [6. When no one wins, display a message about the result being a draw](#6-when-no-one-wins--display-a-message-about-the-result-being-a-draw)
+
+## 1. Display the location for each move in the format (col, row) in the move history list
 
 In this improvement we need to add the location where the move occurred along with the move number. So, if our first move is at square `(1,1)`, then our button should say `Go to #1 At: (1,1)`.
 
@@ -74,9 +83,9 @@ render() {
 }
 ```
 
-This is how the buttons look now:
-
-![Improvement-1](README-Imgs/improvement-1.png)
+| Move location is shown                          |
+| ----------------------------------------------- |
+| ![Improvement-1](README-Imgs/improvement-1.png) |
 
 ## 2. Bold the currently selected item in the move list
 
@@ -116,11 +125,11 @@ render() {
 }
 ```
 
-This is how the buttons look now:
+| Current move is bolded                          |
+| ----------------------------------------------- |
+| ![Improvement-2](README-Imgs/improvement-2.png) |
 
-![Improvement-2](README-Imgs/improvement-2.png)
-
-## 3. Use two loops to render the squares
+## 3. Rewrite Board to use two loops to make the squares instead of hardcoding them
 
 In this improvement we need to make the render method of the Board component more efficient. Currently we have hardcoded the 9 squares that we need to render, which isn't quite neat, instead we can use a nested loop for this.
 
@@ -164,7 +173,7 @@ class Board extends React.Component {
 }
 ```
 
-## 4. Sort the moves in either ascending or descending order
+## 4. Add a toggle button that lets you sort the moves in either ascending or descending order
 
 In this improvement we need to add a button that toggles the order in which the moves are displayed. Currently it is always displayed in ascending order (_i.e from game start to the latest move_), but we need to add a button to toggle this ordering from ascending to descending (_i.e from latest move to game start_) and visa-versa.
 
@@ -228,11 +237,11 @@ render() {
 }
 ```
 
-This is how the moves look in Descending order.
+| Button to toggle the ordering of moves          |
+| ----------------------------------------------- |
+| ![Improvement-3](README-Imgs/improvement-4.png) |
 
-![Improvement-3](README-Imgs/improvement-4.png)
-
-## 5. Highlight the three squares that caused the win.
+## 5. When someone wins, highlight the three squares that caused the win
 
 In this improvement we need to highlight the three squares that caused the win.
 
@@ -344,9 +353,11 @@ function Square(props) {
 
 This how the board looks like when someone wins
 
-![Improvement-3](README-Imgs/improvement-5.png)
+| Winning squares are highlighted                 |
+| ----------------------------------------------- |
+| ![Improvement-3](README-Imgs/improvement-5.png) |
 
-## 6. Display a message about the result being a draw
+## 6. When no one wins, display a message about the result being a draw
 
 In this improvement, we need to display a message when the game is drawn.
 
@@ -372,8 +383,8 @@ function render() {
 }
 ```
 
-This is how game looks when there's a draw
-
-![Improvement-3](README-Imgs/improvement-6.png)
+| Draw message is shown                           |
+| ----------------------------------------------- |
+| ![Improvement-3](README-Imgs/improvement-6.png) |
 
 > We have incorporated all the improvements in our game. Check out the finally code in this repository.
