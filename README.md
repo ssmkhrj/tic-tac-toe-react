@@ -78,7 +78,7 @@ This is how the buttons look now:
 
 ![Improvement-1](README-Imgs/improvement-1.png)
 
-## Bold the currently selected item in the move list
+## 2. Bold the currently selected item in the move list
 
 In this improvement we need to highlight (bold) the move that the user is currently viewing.
 
@@ -120,7 +120,7 @@ This is how the buttons look now:
 
 ![Improvement-2](README-Imgs/improvement-2.png)
 
-## Use two loops to render the squares
+## 3. Use two loops to render the squares
 
 In this improvement we need to make the render method of the Board component more efficient. Currently we have hardcoded the 9 squares that we need to render, which isn't quite neat, instead we can use a nested loop for this.
 
@@ -164,7 +164,7 @@ class Board extends React.Component {
 }
 ```
 
-## Sort the moves in either ascending or descending order
+## 4. Sort the moves in either ascending or descending order
 
 In this improvement we need to add a button that toggles the order in which the moves are displayed. Currently it is always displayed in ascending order (_i.e from game start to the latest move_), but we need to add a button to toggle this ordering from ascending to descending (_i.e from latest move to game start_) and visa-versa.
 
@@ -232,7 +232,7 @@ This is how the moves look in Descending order.
 
 ![Improvement-3](README-Imgs/improvement-4.png)
 
-## Highlight the three squares that caused the win.
+## 5. Highlight the three squares that caused the win.
 
 In this improvement we need to highlight the three squares that caused the win.
 
@@ -345,3 +345,35 @@ function Square(props) {
 This how the board looks like when someone wins
 
 ![Improvement-3](README-Imgs/improvement-5.png)
+
+## 6. Display a message about the result being a draw
+
+In this improvement, we need to display a message when the game is drawn.
+
+Following are the changes that we make in order to achieve this:
+
+- The game is drawn when all the positions in the board is filled and still we don't have a winner. So, we make the following change to incorporate this idea.
+
+```js
+function render() {
+  ...
+  let status;
+  if (winData.winner) {
+    status = "Winner: " + winData.winner;
+  } else {
+    status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+  }
+
+  if (!winData.winner && current.squares.every((x) => x)) status = "Draw";
+
+  return (
+    ...
+  );
+}
+```
+
+This is how game looks when there's a draw
+
+![Improvement-3](README-Imgs/improvement-6.png)
+
+> We have incorporated all the improvements in our game. Check out the finally code in this repository.
