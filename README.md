@@ -17,14 +17,14 @@ npm start
 
 # Improvements
 
-- [1. Display the location for each move in the format (col, row) in the move history list](#1-display-the-location-for-each-move-in-the-format--col--row--in-the-move-history-list)
-- [2. Bold the currently selected item in the move list](#2-bold-the-currently-selected-item-in-the-move-list)
-- [3. Rewrite Board to use two loops to make the squares instead of hardcoding them](#3-rewrite-board-to-use-two-loops-to-make-the-squares-instead-of-hardcoding-them)
-- [4. Add a toggle button that lets you sort the moves in either ascending or descending order](#4-add-a-toggle-button-that-lets-you-sort-the-moves-in-either-ascending-or-descending-order)
-- [5. When someone wins, highlight the three squares that caused the win](#5-when-someone-wins--highlight-the-three-squares-that-caused-the-win)
-- [6. When no one wins, display a message about the result being a draw](#6-when-no-one-wins--display-a-message-about-the-result-being-a-draw)
+1. [Display the location for each move in the format (col, row) in the move history list](<#display-the-location-for-each-move-in-the-format-(col,-row)-in-the-move-history-list>)
+2. [Bold the currently selected item in the move list](#bold-the-currently-selected-item-in-the-move-list)
+3. [Rewrite Board to use two loops to make the squares instead of hardcoding them](#rewrite-board-to-use-two-loops-to-make-the-squares-instead-of-hardcoding-them)
+4. [Add a toggle button that lets you sort the moves in either ascending or descending order](#add-a-toggle-button-that-lets-you-sort-the-moves-in-either-ascending-or-descending-order)
+5. [When someone wins, highlight the three squares that caused the win](#when-someone-wins,-highlight-the-three-squares-that-caused-the-win)
+6. [When no one wins, display a message about the result being a draw](#when-no-one-wins,-display-a-message-about-the-result-being-a-draw)
 
-## 1. Display the location for each move in the format (col, row) in the move history list
+## Display the location for each move in the format (col, row) in the move history list
 
 In this improvement we need to add the location where the move occurred along with the move number. So, if our first move is at square `(1,1)`, then our button should say `Go to #1 At: (1,1)`.
 
@@ -87,7 +87,7 @@ render() {
 | ----------------------------------------------- |
 | ![Improvement-1](README-Imgs/improvement-1.png) |
 
-## 2. Bold the currently selected item in the move list
+## Bold the currently selected item in the move list
 
 In this improvement we need to highlight (bold) the move that the user is currently viewing.
 
@@ -129,7 +129,7 @@ render() {
 | ----------------------------------------------- |
 | ![Improvement-2](README-Imgs/improvement-2.png) |
 
-## 3. Rewrite Board to use two loops to make the squares instead of hardcoding them
+## Rewrite Board to use two loops to make the squares instead of hardcoding them
 
 In this improvement we need to make the render method of the Board component more efficient. Currently we have hardcoded the 9 squares that we need to render, which isn't quite neat, instead we can use a nested loop for this.
 
@@ -173,7 +173,7 @@ class Board extends React.Component {
 }
 ```
 
-## 4. Add a toggle button that lets you sort the moves in either ascending or descending order
+## Add a toggle button that lets you sort the moves in either ascending or descending order
 
 In this improvement we need to add a button that toggles the order in which the moves are displayed. Currently it is always displayed in ascending order (_i.e from game start to the latest move_), but we need to add a button to toggle this ordering from ascending to descending (_i.e from latest move to game start_) and visa-versa.
 
@@ -241,7 +241,7 @@ render() {
 | ----------------------------------------------- |
 | ![Improvement-3](README-Imgs/improvement-4.png) |
 
-## 5. When someone wins, highlight the three squares that caused the win
+## When someone wins, highlight the three squares that caused the win
 
 In this improvement we need to highlight the three squares that caused the win.
 
@@ -357,7 +357,7 @@ This how the board looks like when someone wins
 | ----------------------------------------------- |
 | ![Improvement-3](README-Imgs/improvement-5.png) |
 
-## 6. When no one wins, display a message about the result being a draw
+## When no one wins, display a message about the result being a draw
 
 In this improvement, we need to display a message when the game is drawn.
 
