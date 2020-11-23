@@ -119,3 +119,37 @@ render() {
 This is how the buttons look now:
 
 ![Improvement-2](README-Imgs/improvement-2.png)
+
+## Using two loops to render the squares
+
+In this improvement we need to make the render method of the Board component more efficient. Currently we have hardcoded the 9 squares that we need to render, which isn't quite neat, instead we can use a nested loop for this.
+
+Following are the changes that we make in order to achieve this:
+
+- We add a `renderBoard` method that returns an array containing all the squares and we simply call this method in `render`. So, our board component now looks like this.
+
+```js
+class Board extends React.Component {
+  renderSquare(i) {
+    ...
+  }
+
+  renderBoard() {
+    const numRows = 3;
+    const numCols = 3;
+    const board = [];
+    for (let r = 0; r < numRows; r++) {
+      let row = [];
+      for (let c = 0; c < numCols; c++) {
+        row.push(this.renderSquare(r * numCols + c));
+      }
+      board.push(<div className="board-row">{row}</div>);
+    }
+    return board;
+  }
+
+  render() {
+    return <div>{this.renderBoard()}</div>;
+  }
+}
+```
