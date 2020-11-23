@@ -75,4 +75,47 @@ render() {
 ```
 
 This is how the buttons look now:
+
 ![Improvement-1](README-Imgs/improvement-1.png)
+
+## Bold the currently selected item in the move list
+
+In this improvement we need to highlight (bold) the move that the user is currently viewing.
+
+Following are the changes that we make in order to achieve this:
+
+- Firstly we add a class `highlight` to our css file..
+
+```css
+.highlight {
+  font-weight: bold;
+}
+```
+
+- Then we add the `highlight` class dynamically to the buttons if `move === this.state.stepNumber`, which is `true` only for the button thats currently selected. This how the `render` method looks after the update.
+
+```js
+render() {
+    ...
+    const moves = history.map((step, move) => {
+      const desc = move
+        ? `Go to move #${move} At: ${step.location}`
+        : "Go to game start";
+      return (
+        <li key={move}>
+          <button
+            className={move === this.state.stepNumber ? "highlight" : ""}
+            onClick={() => this.jumpTo(move)}
+          >
+            {desc}
+          </button>
+        </li>
+      );
+    });
+    ...
+}
+```
+
+This is how the buttons look now:
+
+![Improvement-2](README-Imgs/improvement-2.png)
