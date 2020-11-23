@@ -60,6 +60,7 @@ class Game extends React.Component {
       ],
       stepNumber: 0,
       xIsNext: true,
+      isDescending: false,
     };
   }
 
@@ -82,7 +83,6 @@ class Game extends React.Component {
       ]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
-      isDescending: false,
     });
   }
 
