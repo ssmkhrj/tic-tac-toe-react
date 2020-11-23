@@ -126,12 +126,18 @@ In this improvement we need to make the render method of the Board component mor
 
 Following are the changes that we make in order to achieve this:
 
-- We add a `renderBoard` method that returns an array containing all the squares and we simply call this method in `render`. So, our board component now looks like this.
+- We add a `renderBoard` method that returns an array containing all the squares and we simply call this method in `render`. Also, we need to add keys at appropriate places for React to be happy. So, our board component now looks like this.
 
 ```js
 class Board extends React.Component {
   renderSquare(i) {
-    ...
+    return (
+      <Square
+        key={i}
+        value={this.props.squares[i]}
+        onClick={() => this.props.onClick(i)}
+      />
+    );
   }
 
   renderBoard() {
@@ -157,3 +163,71 @@ class Board extends React.Component {
   }
 }
 ```
+
+## Sorting the moves in either ascending or descending order
+
+In this improvement we need to add a button that toggles the order in which the moves are displayed. Currently it is always displayed in ascending order (_i.e from game start to the latest move_), but we need to add a button to toggle this ordering from ascending to descending (_i.e from latest move to game start_) and visa-versa.
+
+Following are the changes that we make in order to achieve this:
+
+- We add a `isDescending` state in the Game component to store the ordering of the moves. Initially in the constructor it is set to `false`. This is how our state looks now.
+
+```js
+this.state = {
+  history: [
+    {
+      squares: Array(9).fill(null),
+      location: null,
+    },
+  ],
+  stepNumber: 0,
+  xIsNext: true,
+  isDescending: false,
+};
+```
+
+- Next, we add a button to the `render` method that dynamically says "Ascending" or "Descending" based on the `isDescending` state. Also, we add a click handler `toggleOrdering` to the button which we will define next. This is how our render looks after this.
+
+```js
+render() {
+    ...
+    return (
+      <div className="game">
+        ...
+        <div className="game-info">
+          <div>{status}</div>
+          <button onClick={() => this.toggleOrdering()}>
+            {this.state.isDescending ? "Ascending" : "Descending"}
+          </button>
+          <ol>{moves}</ol>
+        </div>
+      </div>
+    );
+}
+```
+
+- Now we define the `toggleOrdering` click handler. It simply toggles the `isDescending` state.
+
+```js
+toggleOrdering() {
+  this.setState({
+    isDescending: !this.state.isDescending,
+  });
+}
+```
+
+- Finally we reverse the `moves` variable in the `render` method based on the `isDescending` state. This is how our render method looks now.
+
+```js
+render() {
+    ...
+    if (this.state.isDescending) moves.reverse();
+    return (
+      ...
+    );
+}
+```
+
+This is how the moves look in Descending order.
+
+![Improvement-3](README-Imgs/improvement-4.png)

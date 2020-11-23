@@ -14,6 +14,7 @@ class Board extends React.Component {
   renderSquare(i) {
     return (
       <Square
+        key={i}
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
       />
@@ -77,6 +78,7 @@ class Game extends React.Component {
       ]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
+      isDescending: false,
     });
   }
 
@@ -84,6 +86,12 @@ class Game extends React.Component {
     this.setState({
       stepNumber: step,
       xIsNext: step % 2 === 0,
+    });
+  }
+
+  toggleOrdering() {
+    this.setState({
+      isDescending: !this.state.isDescending,
     });
   }
 
@@ -108,6 +116,8 @@ class Game extends React.Component {
       );
     });
 
+    if (this.state.isDescending) moves.reverse();
+
     let status;
     if (winner) {
       status = "Winner: " + winner;
@@ -125,6 +135,9 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
+          <button onClick={() => this.toggleOrdering()}>
+            {this.state.isDescending ? "Ascending" : "Descending"}
+          </button>
           <ol>{moves}</ol>
         </div>
       </div>
