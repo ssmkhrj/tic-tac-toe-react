@@ -143,7 +143,11 @@ class Board extends React.Component {
       for (let c = 0; c < numCols; c++) {
         row.push(this.renderSquare(r * numCols + c));
       }
-      board.push(<div className="board-row">{row}</div>);
+      board.push(
+        <div className="board-row" key={r}>
+          {row}
+        </div>
+      );
     }
     return board;
   }
