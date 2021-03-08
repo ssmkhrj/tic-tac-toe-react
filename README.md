@@ -387,4 +387,4 @@ function render() {
 | ----------------------------------------------- |
 | ![Improvement-3](README-Imgs/improvement-6.png) |
 
-> We have incorporated all the improvements in our game. Check out the finally code in this repository.
+> We have incorporated all the improvements in our game. Check out the final code in this repository.
